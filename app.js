@@ -1,7 +1,7 @@
 const fs = require('fs'),
     path = require('path'),
     express = require('express'),
-    mustacheExpress = require('mustache-express'),
+    mustache = require('mustache-express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     session = require('express-session'),
@@ -19,7 +19,7 @@ const app = express();
 mongoose.connect(MongoURL, {useMongoClient:true});
 
 app.engine('mustache', mustache());
-app.set('views', './views'));
+app.set('views', './views');
 app.set('view engine', 'mustache')
 app.use('/static', express.static('static'));
 

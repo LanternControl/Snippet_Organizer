@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const snippetSchema = new.mongoose({
+const snippetSchema = new mongoose.Schema({
   title: String,
   body: String,
   notes: String,
