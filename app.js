@@ -6,7 +6,8 @@ const fs = require('fs'),
     LocalStrategy = require('passport-local').Strategy,
     session = require('express-session'),
     bodyParser = require('body-parser'),
-    models = require("./models"),
+    models = require("./models/users"),
+    code = require("./models/snippets"),
     flash = require('express-flash-messages'),
     mongoose = require('mongoose'),
     expressValidator = require('express-validator'),
@@ -151,5 +152,5 @@ app.get('/secret/', requireLogin, function (req, res) {
 })
 
 app.listen(3000, function() {
-    console.log('Express running on http://localhost:3000/.')
+    console.log('Express app succesfully started.')
 });
