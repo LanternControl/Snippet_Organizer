@@ -146,10 +146,24 @@ const requireLogin = function (req, res, next) {
     res.redirect('/login/');
   }
 }
-// change the secret to something different
-app.get('/secret/', requireLogin, function (req, res) {
-  res.render("secret");
-})
+//check ? out
+app.get('/collection/', requireLogin, function (req, res) {
+  Snippet.find({(?)): req.user.username}).sort([['_id', 'descending']]).then(function(snippets){
+    res.render('collection', {snippets:snippets})
+  })
+});
+
+app.get('/snippet-sample/:id', requireLogin, function(req,res){
+  Snippet.findOne({_id: req.params.id}).then(function(snippets){
+    res.render('individual', {snippets:snippets})
+  })
+});
+
+app.get('/language/:language', requireLogin, function(req,res){
+  Snippet.find({language: req.params.language}).then(function(snippets){
+    res.render('language', {snippets:snippets})
+  })
+});
 
 app.listen(3000, function() {
     console.log('Express app succesfully started.')

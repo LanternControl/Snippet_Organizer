@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+  <head>
+    <title>Snippet Organizer</title>
+  </head>
+  <body>
+    <h1>My collection</h1>
+    {{#snippets}}
+      <h2><a href = '/snippet-sample/{{_id}}/'>{{title}}</a></h2>
+      <p>{{notes}}</p>
+      <p>Language:<a href = '/language/{{language}}/'>{{language}}</a></p>
+      {{#tags}}
+      <p><a href = '/tags/{{.}}/'>{{.}}</a></p>
+    </div>
+      {{/tags}}
+    </div>
+    {{/snippets}}
+  </body>
+</html>
