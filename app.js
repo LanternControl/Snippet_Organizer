@@ -153,6 +153,50 @@ app.get('/collection/', requireLogin, function (req, res) {
   })
 });
 
+app.get('/add', requireLogin, function(req,res){
+  res.render('create');
+})
+
+app.post('/add', requireLogin, function(req,res){
+  req.body.tags = req.body.tags.replace(/\s/g, '').split(",")
+  Snippet.create({
+    "author": req.user.username,
+    "title": req.body.title,
+    "body": req.body.body,
+    "notes": req.body.notes,
+    "language": req.body.language,
+    "tags": req.body.tags
+  })
+  .then(function(snippets){
+    res.redirect('/collection/')
+  })
+})
+app.get("/:id/edit", requireLogin, function(req,res){
+  Snippet.findOne({_id:req.params.id}).then(function(snippets){
+    res.render('edit', {snippets:snippets})
+  })
+});
+
+app.post('/:id/delete', requireLogin, function(req,res){
+  Snippet.deleteOne({_id:req.params.id}).then(function(snippets){
+    res.redirect('/collection/')
+  })
+});
+
+app.post('/:id/edit', requireLogin, function (req,res){
+  Snippet.updateOne({_id:req.params.id},
+  {
+    "title": req.body.title,
+    "body": req.body.codeBody,
+    "notes": req.body.notes,
+    "language": req.body.language,
+    "tags": req.body.tags
+  })
+  .then(function(update){
+    res.redirect('/collection/');
+  });
+});
+
 app.get('/snippet-sample/:id', requireLogin, function(req,res){
   Snippet.findOne({_id: req.params.id}).then(function(snippets){
     res.render('individual', {snippets:snippets})
@@ -164,6 +208,13 @@ app.get('/language/:language', requireLogin, function(req,res){
     res.render('language', {snippets:snippets})
   })
 });
+
+app.get('/tags/:tags', requireLogin, function(req,res){
+  Code.find({tags: req.params.tags}).then(function(codes){
+    res.render('tags', {codes:codes})
+  })
+});
+
 
 app.listen(3000, function() {
     console.log('Express app succesfully started.')

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const snippetSchema = new mongoose.Schema({
   title: String,
+  author: String,
   body: String,
   notes: String,
   language: String,
