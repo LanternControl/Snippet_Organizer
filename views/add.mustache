@@ -3,5 +3,15 @@
     <title>Snippet Organizer</title>
   </head>
   <body>
+     <h2>Make a new snippet</h2>
+     <form action = "/add/" method="post">
+       <p><input type = "text" id = "title" name = "title" placeholder="Title: "</p>
+       <p><textarea name = "body" id = "body" form =  "new-form" placeholder="Code Snippet: "></textarea></p>
+       <p><textarea name = "notes" id = "notes" form =  "new-form" placeholder="Notes: "></textarea></p>
+       <p><input type="text" name="language" id="language" placeholder="Language: " /></p>
+       <p><input type = "text" name = "tags" id = "tags" placeholder="Tags (please separate by commas) "/></p>
+       <p><button type = "submit">Create</button></p>
+     </form>
+   </div>
   </body>
 </html>
